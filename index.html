@@ -18,219 +18,121 @@
   --border:rgba(72,180,255,0.14);
   --border2:rgba(255,255,255,0.07);
   --green:#22C55E;
+  --dark-blue:#0A1E4A;
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;position:relative}
 
-/* GRID — hero only */
-.hero-grid-bg{
-  position:absolute;inset:0;z-index:0;
-  background-image:
-    linear-gradient(rgba(72,180,255,0.05) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(72,180,255,0.05) 1px,transparent 1px);
-  background-size:48px 48px;
-  mask-image:linear-gradient(to bottom,rgba(0,0,0,1) 0%,rgba(0,0,0,0.5) 75%,rgba(0,0,0,0) 100%);
-  -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,1) 0%,rgba(0,0,0,0.5) 75%,rgba(0,0,0,0) 100%);
-  pointer-events:none;
-}
-.hero-glow{
-  position:absolute;top:-100px;right:-40px;
-  width:500px;height:460px;
-  background:radial-gradient(ellipse,rgba(27,127,232,0.1) 0%,transparent 68%);
-  z-index:0;pointer-events:none;
-}
-.hero-section{position:relative;overflow:hidden}
+/* ORBS */
+.orbs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.orb{position:absolute;border-radius:50%}
+.orb1{width:320px;height:320px;top:-60px;right:8%;background:radial-gradient(circle at 35% 35%,rgba(72,180,255,0.07) 0%,rgba(27,127,232,0.03) 40%,transparent 70%);border:1px solid rgba(72,180,255,0.06);animation:float1 18s ease-in-out infinite}
+.orb2{width:200px;height:200px;top:40%;left:-40px;background:radial-gradient(circle at 35% 35%,rgba(255,255,255,0.04) 0%,rgba(72,180,255,0.02) 40%,transparent 70%);border:1px solid rgba(255,255,255,0.04);animation:float2 22s ease-in-out infinite}
+.orb3{width:260px;height:260px;bottom:15%;right:5%;background:radial-gradient(circle at 35% 35%,rgba(27,127,232,0.06) 0%,rgba(72,180,255,0.02) 40%,transparent 70%);border:1px solid rgba(72,180,255,0.05);animation:float3 25s ease-in-out infinite}
+.orb4{width:140px;height:140px;top:60%;left:30%;background:radial-gradient(circle at 35% 35%,rgba(255,255,255,0.03) 0%,transparent 65%);border:1px solid rgba(255,255,255,0.03);animation:float1 30s ease-in-out infinite reverse}
+.orb5{width:400px;height:400px;bottom:-100px;left:10%;background:radial-gradient(circle at 35% 35%,rgba(27,127,232,0.04) 0%,transparent 60%);border:1px solid rgba(27,127,232,0.04);animation:float2 35s ease-in-out infinite}
+@keyframes float1{0%,100%{transform:translate(0,0) rotate(0deg)}33%{transform:translate(12px,-18px) rotate(3deg)}66%{transform:translate(-8px,10px) rotate(-2deg)}}
+@keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(15px,-25px)}}
+@keyframes float3{0%,100%{transform:translate(0,0) rotate(0deg)}40%{transform:translate(-10px,14px) rotate(2deg)}75%{transform:translate(8px,-8px) rotate(-1deg)}}
 
 /* NAV */
-nav{
-  position:sticky;top:0;z-index:100;
-  border-bottom:1px solid var(--border2);
-  background:rgba(5,7,13,0.92);
-  backdrop-filter:blur(20px);
-}
-.nav-inner{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:13px 32px;max-width:1160px;margin:0 auto;
-}
+nav{position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border2);background:rgba(5,7,13,0.95);backdrop-filter:blur(20px)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:13px 32px;max-width:1160px;margin:0 auto}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.logo-icon{
-  width:32px;height:32px;border-radius:7px;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Montserrat',sans-serif;font-weight:900;font-size:13px;color:#fff;flex-shrink:0;
-}
+.logo-icon{width:32px;height:32px;border-radius:7px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:900;font-size:13px;color:#fff;flex-shrink:0}
 .logo-text{font-family:'Montserrat',sans-serif;font-weight:800;font-size:14px;letter-spacing:0.07em;color:#fff}
 .logo-text span{color:var(--accent2)}
 .nav-right{display:flex;align-items:center;gap:18px}
 .status{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text2)}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2.2s infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,0.45)}50%{box-shadow:0 0 0 5px rgba(34,197,94,0)}}
-.btn-nav{
-  padding:8px 20px;border:1px solid var(--accent);border-radius:8px;
-  color:var(--accent);font-size:13px;font-weight:600;cursor:pointer;
-  background:transparent;transition:all .2s;text-decoration:none;
-  display:flex;align-items:center;gap:8px;
-}
-.btn-nav:hover{background:rgba(27,127,232,0.1);box-shadow:0 0 18px rgba(27,127,232,0.2)}
-.tg-icon{width:16px;height:16px;flex-shrink:0}
+.btn-nav{padding:8px 20px;border:1px solid var(--accent);border-radius:8px;color:var(--accent);font-size:13px;font-weight:600;background:transparent;transition:all .2s;text-decoration:none;display:flex;align-items:center;gap:8px}
+.btn-nav:hover{background:rgba(27,127,232,0.1)}
 
 /* HERO */
-.hero-inner{
-  position:relative;z-index:1;
-  display:grid;grid-template-columns:1fr 400px;gap:60px;align-items:center;
-  max-width:1160px;margin:0 auto;padding:80px 32px 0;
-}
-.badge{
-  display:inline-flex;align-items:center;gap:7px;
-  padding:5px 13px;border:1px solid var(--border);border-radius:100px;
-  font-size:11px;font-weight:700;letter-spacing:0.12em;
-  color:var(--accent2);background:rgba(72,180,255,0.07);
-  margin-bottom:22px;
-}
+.hero-section{position:relative;overflow:hidden}
+.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 400px;gap:60px;align-items:center;max-width:1160px;margin:0 auto;padding:80px 32px 0}
+.badge{display:inline-flex;align-items:center;gap:7px;padding:5px 13px;border:1px solid var(--border);border-radius:100px;font-size:11px;font-weight:700;letter-spacing:0.12em;color:var(--accent2);background:rgba(72,180,255,0.07);margin-bottom:22px}
 .badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent2)}
-h1{
-  font-family:'Montserrat',sans-serif;
-  font-size:clamp(30px,3.2vw,48px);font-weight:800;line-height:1.18;
-  margin-bottom:18px;letter-spacing:-0.025em;
-}
-h1 em{
-  font-style:normal;
-  background:linear-gradient(130deg,var(--accent2) 0%,var(--accent) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-}
+h1{font-family:'Montserrat',sans-serif;font-size:clamp(30px,3.2vw,48px);font-weight:800;line-height:1.18;margin-bottom:18px;letter-spacing:-0.025em}
+h1 em{font-style:normal;background:linear-gradient(130deg,var(--accent2) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .sub{font-size:15px;color:var(--text2);line-height:1.75;margin-bottom:34px;max-width:480px}
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
-.btn-primary{
-  padding:14px 28px;border:none;border-radius:10px;
-  background:linear-gradient(130deg,var(--accent),var(--accent2));
-  color:#fff;font-size:14px;font-weight:700;cursor:pointer;
-  transition:all .2s;text-decoration:none;display:flex;align-items:center;gap:8px;
-}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(27,127,232,0.45)}
-.btn-secondary{
-  padding:14px 28px;border:none;border-radius:10px;
-  background:linear-gradient(130deg,rgba(255,255,255,0.95),rgba(220,230,255,0.9));
-  color:#0A1628;font-size:14px;font-weight:700;cursor:pointer;
-  transition:all .2s;text-decoration:none;
-}
-.btn-secondary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(255,255,255,0.15)}
+.btn-primary{padding:14px 28px;border:none;border-radius:10px;background:linear-gradient(130deg,var(--accent),var(--accent2));color:#fff;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none;display:flex;align-items:center;gap:8px}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(27,127,232,0.4)}
+.btn-secondary{padding:14px 28px;border:none;border-radius:10px;background:linear-gradient(130deg,rgba(255,255,255,0.95),rgba(220,230,255,0.88));color:#0A1628;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none}
+.btn-secondary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(255,255,255,0.12)}
+.hero-photo{position:relative;align-self:end;z-index:1}
+.photo-frame{border-radius:16px 16px 0 0;overflow:hidden;border:1px solid var(--border);border-bottom:none}
+.photo-frame img{width:100%;height:460px;object-fit:cover;object-position:center top;display:block;filter:contrast(1.04) brightness(0.95)}
 
-/* PHOTO */
-.hero-photo{position:relative;align-self:end}
-.photo-frame{
-  border-radius:16px 16px 0 0;overflow:hidden;
-  border:1px solid var(--border);border-bottom:none;
-}
-.photo-frame img{
-  width:100%;height:460px;object-fit:cover;object-position:center top;
-  display:block;filter:contrast(1.04) brightness(0.95);
-}
-
-/* METRICS BAR */
-.metrics-bar-wrap{
-  position:relative;z-index:1;
-  max-width:1160px;margin:0 auto;padding:0 32px;
-}
-.metrics-bar{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  border:1px solid var(--border);border-radius:0 0 16px 16px;overflow:hidden;
-  background:linear-gradient(135deg,#0A1628 0%,#091224 50%,#0C1830 100%);
-  margin-bottom:80px;
-}
-.metric{padding:26px 24px;text-align:center;border-right:1px solid var(--border)}
-.metric:last-child{border-right:none}
-.metric-num{
-  font-family:'Montserrat',sans-serif;font-size:clamp(20px,2.2vw,30px);
-  font-weight:900;margin-bottom:6px;
-  background:linear-gradient(130deg,#fff 0%,var(--accent2) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-}
+/* METRICS */
+.metrics-bar-wrap{position:relative;z-index:1;max-width:1160px;margin:0 auto;padding:0 32px;margin-bottom:80px}
+.metrics-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.metric{padding:26px 24px;text-align:center;border-radius:16px;background:linear-gradient(135deg,#0A1628 0%,#091224 60%,#0C1830 100%);border:1px solid var(--border)}
+.metric-num{font-family:'Montserrat',sans-serif;font-size:clamp(20px,2.2vw,30px);font-weight:900;margin-bottom:6px;background:linear-gradient(130deg,#fff 0%,var(--accent2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .metric-label{font-size:12px;color:var(--text2);letter-spacing:0.03em}
 
 /* SECTIONS */
-.section{padding:64px 0}
+.section{padding:64px 0;position:relative;z-index:1}
 .wrap{max-width:1160px;margin:0 auto;padding:0 32px}
-.section-tag{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:5px 13px;border:1px solid var(--border);border-radius:100px;
-  font-size:11px;font-weight:700;letter-spacing:0.1em;
-  color:var(--accent2);background:rgba(72,180,255,0.07);
-  margin-bottom:20px;
-}
+.section-tag{display:inline-flex;align-items:center;gap:6px;padding:5px 13px;border:1px solid var(--border);border-radius:100px;font-size:11px;font-weight:700;letter-spacing:0.1em;color:var(--accent2);background:rgba(72,180,255,0.07);margin-bottom:20px}
 .section-tag::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent)}
-h2{
-  font-family:'Montserrat',sans-serif;
-  font-size:clamp(26px,3vw,40px);font-weight:800;letter-spacing:-0.02em;
-  margin-bottom:10px;line-height:1.2;
-}
+h2{font-family:'Montserrat',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:800;letter-spacing:-0.02em;margin-bottom:10px;line-height:1.2}
 .section-desc{font-size:15px;color:var(--text2);line-height:1.7;max-width:500px;margin-bottom:44px}
 
 /* PROBLEM CARDS */
-.problems-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.card{
-  background:var(--card);border:1px solid rgba(255,255,255,0.07);border-radius:16px;
-  padding:28px;transition:border-color .3s,transform .3s;
+.problems-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.pcard{
+  border-radius:18px;
+  background:linear-gradient(150deg,#ffffff 0%,#EDF3FF 55%,#D4E5FF 100%);
+  border:1px solid rgba(27,127,232,0.12);
+  transition:transform .3s,box-shadow .3s;
+  overflow:hidden;
 }
-.card:hover{border-color:rgba(72,180,255,0.25);transform:translateY(-3px)}
-.card-num{font-size:13px;font-weight:700;color:var(--text3);margin-bottom:20px;font-family:'Montserrat',sans-serif}
-.clabel{
-  display:inline-block;padding:3px 10px;border-radius:100px;
-  font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
-  border:1px solid rgba(72,180,255,0.2);color:var(--text2);
-  margin-bottom:10px;
+.pcard:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(27,127,232,0.14)}
+
+/* Dark blue number badge at top */
+.pcard-header{
+  background:linear-gradient(135deg,#0A1E4A 0%,#122060 100%);
+  padding:16px 24px;
 }
-.card-text{font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:16px}
-.card-hr{height:1px;background:rgba(255,255,255,0.06);margin:0 0 16px}
-.card-result-title{font-size:14px;font-weight:700;color:var(--accent2);margin-bottom:6px}
-.card-result-body{font-size:12px;color:var(--text2);line-height:1.6}
+.pcard-num{
+  font-family:'Montserrat',sans-serif;
+  font-size:28px;font-weight:900;
+  color:#fff;line-height:1;
+}
+
+.pcard-body{padding:24px 24px 26px}
+.pcard-title{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:800;color:#0A1E4A;margin-bottom:12px;line-height:1.3}
+.pcard-text{font-size:13px;color:#2A3D6B;line-height:1.68;margin-bottom:16px}
+.pcard-divider{height:1px;background:rgba(27,127,232,0.15);margin:0 0 16px}
+.pcard-result{font-size:13px;font-weight:600;color:#1B5FC4;line-height:1.6;padding:11px 14px;background:rgba(27,127,232,0.08);border-radius:10px;border-left:3px solid #1B7FE8}
 
 /* CASES */
-.case-main{
-  background:var(--card);border:1px solid rgba(255,255,255,0.07);border-radius:16px;
-  padding:36px;margin-bottom:16px;position:relative;overflow:hidden;
-}
-.case-main::before{
-  content:'';position:absolute;top:-60px;right:-60px;
-  width:220px;height:220px;
-  background:radial-gradient(circle,rgba(27,127,232,0.07),transparent 70%);
-  pointer-events:none;
-}
-.case-grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.case-small{background:var(--card);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:26px;transition:border-color .3s}
-.case-small:hover{border-color:rgba(72,180,255,0.25)}
-.case-project{font-size:13px;color:var(--text2);margin-bottom:8px}
-.case-metric{
-  font-family:'Montserrat',sans-serif;
-  font-size:clamp(20px,2.2vw,28px);font-weight:800;margin-bottom:14px;line-height:1.2;
-}
-.case-metric span{
-  background:linear-gradient(130deg,var(--accent2),var(--accent));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-}
-.tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
-.tag{
-  padding:4px 11px;border-radius:100px;font-size:11px;font-weight:600;
-  background:rgba(27,127,232,0.1);color:var(--accent2);border:1px solid rgba(27,127,232,0.2);
-}
+.cases-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.case-card{background:var(--card);border:1px solid rgba(255,255,255,0.07);border-radius:18px;padding:32px;transition:border-color .3s,transform .3s;position:relative;overflow:hidden}
+.case-card::before{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;background:radial-gradient(circle,rgba(27,127,232,0.06),transparent 70%);pointer-events:none}
+.case-card:hover{border-color:rgba(72,180,255,0.25);transform:translateY(-3px)}
+.case-avatar{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.case-avatar img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--border)}
+.case-avatar-name{font-size:14px;font-weight:700;color:var(--text)}
+.case-avatar-role{font-size:12px;color:var(--accent2);margin-top:2px}
+.case-metric{font-family:'Montserrat',sans-serif;font-size:clamp(22px,2.5vw,32px);font-weight:800;margin-bottom:14px;line-height:1.15}
+.case-metric span{background:linear-gradient(130deg,var(--accent2),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.tag{padding:4px 11px;border-radius:100px;font-size:11px;font-weight:600;background:rgba(27,127,232,0.1);color:var(--accent2);border:1px solid rgba(27,127,232,0.2)}
 .case-desc{font-size:13px;color:var(--text2);line-height:1.65}
-
-/* PROGRESS BARS for case streams */
-.streams{display:flex;flex-direction:column;gap:14px;margin:20px 0}
+.streams{display:flex;flex-direction:column;gap:14px;margin:18px 0}
 .stream-row{display:flex;flex-direction:column;gap:6px}
-.stream-header{display:flex;justify-content:space-between;align-items:center}
+.stream-header{display:flex;justify-content:space-between}
 .stream-label{font-size:13px;color:var(--text2)}
 .stream-value{font-size:13px;font-weight:700;color:var(--text)}
-.stream-track{
-  height:6px;background:rgba(255,255,255,0.07);border-radius:100px;overflow:hidden;
-}
-.stream-fill{
-  height:100%;border-radius:100px;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
-  transition:width 1s ease;
-}
+.stream-track{height:5px;background:rgba(255,255,255,0.07);border-radius:100px;overflow:hidden}
+.stream-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
 
 /* FOOTER */
-footer{border-top:1px solid var(--border2);padding:36px 0;text-align:center;color:var(--text3);font-size:12px}
+footer{border-top:1px solid var(--border2);padding:36px 0;text-align:center;color:var(--text3);font-size:12px;position:relative;z-index:1}
 .footer-logo{font-family:'Montserrat',sans-serif;font-weight:800;font-size:14px;color:var(--text);margin-bottom:8px;letter-spacing:0.07em}
 footer a{color:var(--accent2);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
 
@@ -238,12 +140,10 @@ footer a{color:var(--accent2);text-decoration:none;display:inline-flex;align-ite
   .hero-inner{grid-template-columns:1fr;gap:36px;padding:56px 24px 0}
   .hero-photo{order:-1}
   .photo-frame img{height:340px}
-  .metrics-bar{grid-template-columns:1fr}
-  .metrics-bar .metric{border-right:none;border-bottom:1px solid var(--border)}
-  .metrics-bar .metric:last-child{border-bottom:none}
+  .metrics-bar{grid-template-columns:1fr;gap:10px}
   .metrics-bar-wrap{padding:0 24px}
   .problems-grid{grid-template-columns:1fr}
-  .case-grid2{grid-template-columns:1fr}
+  .cases-grid{grid-template-columns:1fr}
   .wrap{padding:0 24px}
   .nav-right .status{display:none}
   h1{font-size:28px}
@@ -256,16 +156,24 @@ footer a{color:var(--accent2);text-decoration:none;display:inline-flex;align-ite
 </head>
 <body>
 
+<div class="orbs">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  <div class="orb orb4"></div>
+  <div class="orb orb5"></div>
+</div>
+
 <nav>
   <div class="nav-inner">
     <a href="#" class="logo">
-      <div class="logo-icon">YP</div>
-      <div class="logo-text">YOLAMAN<span> PRODUCT</span></div>
+      <div class="logo-icon">MP</div>
+      <div class="logo-text">MEKAN<span> PRODUCT</span></div>
     </a>
     <div class="nav-right">
       <div class="status"><span class="dot"></span> Доступен для проектов</div>
       <a href="https://t.me/flowdesignn" class="btn-nav">
-        <svg class="tg-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
           <path d="M22 2L11 13" stroke="#1B7FE8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="#1B7FE8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -276,9 +184,6 @@ footer a{color:var(--accent2);text-decoration:none;display:inline-flex;align-ite
 </nav>
 
 <div class="hero-section">
-  <div class="hero-grid-bg"></div>
-  <div class="hero-glow"></div>
-
   <div class="hero-inner">
     <div class="hero-content">
       <div class="badge">Система и Масштаб</div>
@@ -286,7 +191,7 @@ footer a{color:var(--accent2);text-decoration:none;display:inline-flex;align-ite
       <p class="sub">Создаю твёрдую архитектуру процессов, автоворонок и сквозной аналитики под ваш проект. Вы фокусируетесь на продукте — маркетинг работает на полную мощность.</p>
       <div class="hero-btns">
         <a href="https://t.me/flowdesignn" class="btn-primary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
             <path d="M22 2L11 13" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
@@ -301,19 +206,18 @@ footer a{color:var(--accent2);text-decoration:none;display:inline-flex;align-ite
       </div>
     </div>
   </div>
-
-  <div class="metrics-bar-wrap">
+  <div class="metrics-bar-wrap" style="padding-top:0">
     <div class="metrics-bar">
       <div class="metric">
-        <div class="metric-num">7+</div>
+        <div class="metric-num">5+</div>
         <div class="metric-label">реализованных проектов</div>
       </div>
       <div class="metric">
-        <div class="metric-num">12.000.000 ₽</div>
+        <div class="metric-num">8.000.000 ₽</div>
         <div class="metric-label">суммарная выручка клиентов</div>
       </div>
       <div class="metric">
-        <div class="metric-num">×5</div>
+        <div class="metric-num">×3</div>
         <div class="metric-label">рост лучшего кейса</div>
       </div>
     </div>
@@ -328,40 +232,43 @@ footer a{color:var(--accent2);text-decoration:none;display:inline-flex;align-ite
     <p class="section-desc">Каждая ситуация — конкретные действия и измеримый результат.</p>
     <div class="problems-grid">
 
-      <div class="card">
-        <div class="card-num">01</div>
-        <div class="clabel">Ситуация</div>
-        <p class="card-text">Есть подписчики, которые вас любят, но деньги с каждого запуска всё меньше, а люди устают и отписываются.</p>
-        <div class="card-hr"></div>
-        <div class="clabel">Что делаю</div>
-        <p class="card-text">Разбираю, чего на самом деле хочет ваша аудитория. Перестраиваю линейку продуктов и выстраиваю продажи, которые не давят на людей.</p>
-        <div class="card-hr"></div>
-        <div class="card-result-title">Доход растёт, база остаётся живой.</div>
-        <div class="card-result-body">Каждый подписчик приносит больше в долгосрочной перспективе — без выжигания.</div>
+      <div class="pcard">
+        <div class="pcard-header">
+          <div class="pcard-num">01</div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-title">База есть, но деньги не растут</div>
+          <p class="pcard-text">Есть подписчики, которые вас любят, но с каждым запуском результат хуже. Люди устают и уходят.</p>
+          <div class="pcard-divider"></div>
+          <p class="pcard-text">Разбираю, чего на самом деле хочет аудитория. Перестраиваю линейку и выстраиваю продажи без давления.</p>
+          <div class="pcard-result">Доход растёт, база остаётся живой и активной.</div>
+        </div>
       </div>
 
-      <div class="card">
-        <div class="card-num">02</div>
-        <div class="clabel">Ситуация</div>
-        <p class="card-text">То, что работало раньше, уже не даёт результата. Деньги на рекламу уходят, а продаж нет.</p>
-        <div class="card-hr"></div>
-        <div class="clabel">Что делаю</div>
-        <p class="card-text">Нахожу, где именно теряются клиенты. Собираю простую воронку под конкретный сегмент и проверяю её на небольшом бюджете.</p>
-        <div class="card-hr"></div>
-        <div class="card-result-title">Поток заявок и ROI от 300%.</div>
-        <div class="card-result-body">Вы заранее знаете, сколько принесёт следующий запуск, ещё до его старта.</div>
+      <div class="pcard">
+        <div class="pcard-header">
+          <div class="pcard-num">02</div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-title">Реклама не окупается</div>
+          <p class="pcard-text">То, что работало раньше, больше не даёт результата. Деньги на трафик уходят, а продаж нет.</p>
+          <div class="pcard-divider"></div>
+          <p class="pcard-text">Нахожу, где теряются клиенты. Собираю воронку под конкретный сегмент и проверяю на небольшом бюджете.</p>
+          <div class="pcard-result">Поток заявок и ROI от 300% — до старта запуска.</div>
+        </div>
       </div>
 
-      <div class="card">
-        <div class="card-num">03</div>
-        <div class="clabel">Ситуация</div>
-        <p class="card-text">Всё время уходит на текучку. Подрядчики подводят, задачи копятся, а вы не успеваете заниматься главным.</p>
-        <div class="card-hr"></div>
-        <div class="clabel">Что делаю</div>
-        <p class="card-text">Выстраиваю процессы, нахожу и ввожу в работу нужных людей, берусь за операционку и настраиваю понятную отчётность.</p>
-        <div class="card-hr"></div>
-        <div class="card-result-title">Эксперт занимается только продуктом.</div>
-        <div class="card-result-body">Всё остальное работает самостоятельно, без постоянного контроля с вашей стороны.</div>
+      <div class="pcard">
+        <div class="pcard-header">
+          <div class="pcard-num">03</div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-title">Тонете в операционке</div>
+          <p class="pcard-text">Всё время уходит на текучку. Подрядчики подводят, задачи копятся, на главное сил не остаётся.</p>
+          <div class="pcard-divider"></div>
+          <p class="pcard-text">Выстраиваю процессы, нахожу нужных людей, берусь за операционку и настраиваю прозрачную отчётность.</p>
+          <div class="pcard-result">Эксперт занимается только продуктом. Остальное — автономно.</div>
+        </div>
       </div>
 
     </div>
@@ -373,80 +280,79 @@ footer a{color:var(--accent2);text-decoration:none;display:inline-flex;align-ite
   <div class="wrap">
     <div class="section-tag">КЕЙСЫ</div>
     <h2>Реализованные проекты</h2>
-    <p class="section-desc">Реальные цифры, конкретные ситуации — без воды и размытых формулировок.</p>
+    <p class="section-desc">Реальные цифры, конкретные ситуации — без воды.</p>
+    <div class="cases-grid">
 
-    <div class="case-main">
-      <div class="case-project">ArtKastro | Дизайн соц. сетей</div>
-      <div class="case-metric">Три потока курса с нуля до <span>2.000.000 ₽</span></div>
-      <div class="tags">
-        <span class="tag">Рост ×5 за 3 потока</span>
-        <span class="tag">Курс для дизайнеров</span>
-        <span class="tag">Охваты 600–900</span>
+      <div class="case-card">
+        <div class="case-avatar">
+          <img src="data:image/jpeg;base64,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" alt="ArtKastro">
+          <div>
+            <div class="case-avatar-name">ArtKastro</div>
+            <div class="case-avatar-role">Дизайн соц. сетей</div>
+          </div>
+        </div>
+        <div class="case-metric">С нуля до <span>2.000.000 ₽</span></div>
+        <div class="tags">
+          <span class="tag">Рост ×3 за 3 потока</span>
+          <span class="tag">Курс для дизайнеров</span>
+          <span class="tag">Охваты 600–900</span>
+        </div>
+        <div class="streams">
+          <div class="stream-row">
+            <div class="stream-header"><span class="stream-label">Поток 1</span><span class="stream-value">400.000 ₽</span></div>
+            <div class="stream-track"><div class="stream-fill" style="width:20%"></div></div>
+          </div>
+          <div class="stream-row">
+            <div class="stream-header"><span class="stream-label">Поток 2</span><span class="stream-value">655.000 ₽</span></div>
+            <div class="stream-track"><div class="stream-fill" style="width:33%"></div></div>
+          </div>
+          <div class="stream-row">
+            <div class="stream-header"><span class="stream-label">Поток 3</span><span class="stream-value">2.000.000 ₽</span></div>
+            <div class="stream-track"><div class="stream-fill" style="width:100%"></div></div>
+          </div>
+        </div>
+        <p class="case-desc">Эксперт с небольшой аудиторией в нише дизайна соцсетей. Каждый поток приносил кратно больше — выстроили систему, которая масштабируется без увеличения нагрузки на эксперта.</p>
       </div>
 
-      <div class="streams">
-        <div class="stream-row">
-          <div class="stream-header">
-            <span class="stream-label">Поток 1</span>
-            <span class="stream-value">400.000 ₽</span>
-          </div>
-          <div class="stream-track">
-            <div class="stream-fill" style="width:20%"></div>
+      <div class="case-card">
+        <div class="case-avatar">
+          <img src="data:image/jpeg;base64,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" alt="Елена Володина">
+          <div>
+            <div class="case-avatar-name">Елена Володина</div>
+            <div class="case-avatar-role">Дизайн квартир</div>
           </div>
         </div>
-        <div class="stream-row">
-          <div class="stream-header">
-            <span class="stream-label">Поток 2</span>
-            <span class="stream-value">655.000 ₽</span>
-          </div>
-          <div class="stream-track">
-            <div class="stream-fill" style="width:33%"></div>
-          </div>
-        </div>
-        <div class="stream-row">
-          <div class="stream-header">
-            <span class="stream-label">Поток 3</span>
-            <span class="stream-value">2.000.000 ₽</span>
-          </div>
-          <div class="stream-track">
-            <div class="stream-fill" style="width:100%"></div>
-          </div>
-        </div>
-      </div>
-
-      <p class="case-desc">Эксперт с небольшой аудиторией в нише дизайна соцсетей. Каждый следующий поток приносил кратно больше — выстроили систему, которая масштабируется без увеличения нагрузки на эксперта.</p>
-    </div>
-
-    <div class="case-grid2">
-      <div class="case-small">
-        <div class="case-project">Елена Володина | Дизайн квартир</div>
         <div class="case-metric"><span>1.700.000 ₽</span> с одного запуска</div>
-        <div class="tags"><span class="tag">Хоумстейджинг</span><span class="tag">Telegram</span></div>
-        <p class="case-desc">Эксперт по интерьеру с Telegram-аудиторией 1200–1700 человек. Упаковали экспертизу в продукт и выстроили продажи без агрессивного давления.</p>
+        <div class="tags">
+          <span class="tag">Хоумстейджинг</span>
+          <span class="tag">Telegram-аудитория</span>
+        </div>
+        <div class="streams" style="margin-top:16px">
+          <div class="stream-row">
+            <div class="stream-header"><span class="stream-label">Запуск</span><span class="stream-value">1.700.000 ₽</span></div>
+            <div class="stream-track"><div class="stream-fill" style="width:85%"></div></div>
+          </div>
+        </div>
+        <p class="case-desc" style="margin-top:16px">Эксперт по интерьеру с Telegram-аудиторией 1200–1700 человек. Упаковали экспертизу в образовательный продукт и выстроили продажи без агрессивного давления на подписчиков.</p>
       </div>
-      <div class="case-small">
-        <div class="case-project">TheUnlock | Заработок онлайн</div>
-        <div class="case-metric"><span>594.000 ₽</span> стабильно в месяц</div>
-        <div class="tags"><span class="tag">Подписная модель</span><span class="tag">Стабильный доход</span></div>
-        <p class="case-desc">Проект с охватами 1700–2000. Перешли с разовых продаж на подписную модель — теперь выручка предсказуема каждый месяц без новых запусков.</p>
-      </div>
+
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="footer-logo">YOLAMAN PRODUCT</div>
-  <p style="margin-bottom:6px">Ёламанов Мекан — Продюсер запусков экспертов</p>
+  <div class="footer-logo">MEKAN PRODUCT</div>
+  <p>Ёламанов Мекан — Продюсер запусков экспертов</p>
   <p style="margin-top:8px">
     <a href="https://t.me/flowdesignn">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
         <path d="M22 2L11 13" stroke="#48B4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="#48B4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       Написать в Telegram @flowdesignn
     </a>
   </p>
-  <p style="margin-top:18px;opacity:0.3;font-size:11px">© 2025 Yolaman Product</p>
+  <p style="margin-top:18px;opacity:0.3;font-size:11px">© 2025 Mekan Product</p>
 </footer>
 
 </body>
